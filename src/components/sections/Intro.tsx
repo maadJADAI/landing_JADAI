@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Constellation } from "@/components/interactive/Constellation";
 import { ReferentsMarquee } from "@/components/interactive/ReferentsMarquee";
 import { useReducedMotion } from "@/lib/hooks";
 import { readToken } from "@/lib/utils";
@@ -47,14 +46,9 @@ export function Intro() {
     <section
       ref={ref}
       data-theme="dark"
-      className="relative flex min-h-dvh flex-col overflow-hidden bg-bg text-ink"
+      className="relative z-10 flex min-h-dvh flex-col overflow-hidden text-ink"
       aria-label="Introducción"
     >
-      {/* constelación de fondo */}
-      <div className="absolute inset-0">
-        <Constellation density={14000} />
-      </div>
-
       {/* nodo 3D — sutil, detrás del contenido; 1 sola instancia (docs/05) */}
       {!reduce && colors ? (
         <div className="absolute inset-x-0 top-1/2 z-0 mx-auto h-[min(70vw,520px)] w-[min(70vw,520px)] -translate-y-1/2 opacity-55">
@@ -74,7 +68,7 @@ export function Intro() {
             className="h-12 w-auto sm:h-16"
           />
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
-            Estudio de IA aplicada — Guayaquil, Ecuador
+            IA aplicada / Ecuador
           </p>
         </div>
 

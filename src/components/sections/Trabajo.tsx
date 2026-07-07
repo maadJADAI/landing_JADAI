@@ -7,7 +7,7 @@ import { casos } from "@/content/casos";
    Nombres/cifras de clientes pendientes de permiso (docs/08). */
 export function Trabajo() {
   return (
-    <section id="trabajo" className="border-t border-rule bg-bg py-24">
+    <section id="trabajo" className="border-t border-rule py-24">
       <Container>
         <SectionHead
           numero="03 · Trabajo"

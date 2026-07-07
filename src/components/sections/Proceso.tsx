@@ -6,7 +6,7 @@ import { proceso } from "@/content/proceso";
 /* Cómo trabajamos (docs/04 §7): 3 pasos con hairlines. */
 export function Proceso() {
   return (
-    <section id="proceso" className="border-t border-rule bg-bg py-24">
+    <section id="proceso" className="border-t border-rule py-24">
       <Container>
         <SectionHead
           numero="05 · Enfoque"

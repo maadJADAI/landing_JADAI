@@ -7,7 +7,7 @@ import { site } from "@/content/site";
 /* Footer oscuro (docs/04 §9), restilado a tokens; logo blanco (docs/01 §5). */
 export function Footer() {
   return (
-    <footer data-theme="dark" className="bg-bg py-16 text-ink">
+    <footer className="relative z-10 border-t border-rule py-16 text-ink">
       <Container>
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
@@ -19,7 +19,7 @@ export function Footer() {
               className="h-9 w-auto"
             />
             <p className="mt-5 max-w-[32ch] text-sm leading-relaxed text-ink-2">
-              {site.claim} Estudio de IA aplicada en {site.ciudad}.
+              {site.claim} IA aplicada desde {site.ciudad}.
             </p>
           </div>
 

@@ -7,7 +7,7 @@ import { ChatbotDemo } from "@/components/interactive/ChatbotDemo";
 /* "Lo que construimos" (docs/04 §3): demo viva, no mockup muerto. */
 export function Demo() {
   return (
-    <section id="demo" className="border-t border-rule bg-bg-alt py-24">
+    <section id="demo" className="border-t border-rule py-24">
       <Container>
         <SectionHead
           numero="02 · Producto"

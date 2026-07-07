@@ -11,11 +11,8 @@ function Counter({ stat, play }: { stat: Stat; play: boolean }) {
   const [n, setN] = useState(0);
 
   useEffect(() => {
-    if (!play) return;
-    if (reduce) {
-      setN(stat.valor);
-      return;
-    }
+    // reduced-motion no anima: se renderiza el valor final directo (abajo)
+    if (!play || reduce) return;
     let raf = 0;
     const t0 = performance.now();
     const step = (now: number) => {
@@ -31,7 +28,7 @@ function Counter({ stat, play }: { stat: Stat; play: boolean }) {
     <div className="border-l border-rule pl-5">
       <p className="text-display font-semibold tracking-[-.04em]">
         {stat.prefijo}
-        {n}
+        {reduce ? stat.valor : n}
         {stat.sufijo}
       </p>
       <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] text-muted">

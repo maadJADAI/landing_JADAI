@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "JADAI — Estudio de IA aplicada";
+export const alt = "JADAI — IA aplicada";
 
 /* OG 1200×630 (docs/09): tema oscuro del sistema, wordmark + claim.
    Valores de color = tokens del modo oscuro (docs/01 §2.5). */
@@ -59,7 +59,7 @@ export default function OgImage() {
             textTransform: "uppercase",
           }}
         >
-          Fintech · Agro · Agentes — Guayaquil, Ecuador
+          Fintech · Agro · Agentes — IA aplicada / Ecuador
         </div>
       </div>
     ),

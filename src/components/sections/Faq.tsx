@@ -5,7 +5,7 @@ import { faq } from "@/content/faq";
 /* FAQ en texto plano real — GEO/citación por IA (docs/09). */
 export function Faq() {
   return (
-    <section id="faq" className="border-t border-rule bg-bg-alt py-24">
+    <section id="faq" className="border-t border-rule py-24">
       <Container>
         <SectionHead
           numero="06 · Preguntas"

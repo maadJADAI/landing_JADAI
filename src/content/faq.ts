@@ -4,7 +4,7 @@ export type Pregunta = { q: string; a: string };
 export const faq: Pregunta[] = [
   {
     q: "¿Qué hace JADAI?",
-    a: "JADAI es un estudio de IA aplicada con sede en Guayaquil, Ecuador. Construimos agentes, chatbots y modelos a medida para empresas de fintech, agro (acuicultura) y operaciones — software en producción que genera resultados, no prototipos.",
+    a: "JADAI es un equipo de IA aplicada con sede en Ecuador. Construimos agentes, chatbots y modelos a medida para empresas de fintech, agro (acuicultura) y operaciones — software en producción que genera resultados, no prototipos.",
   },
   {
     q: "¿Hacen agentes de WhatsApp?",

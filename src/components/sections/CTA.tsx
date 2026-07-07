@@ -7,7 +7,7 @@ import { agendarHref, whatsappHref, site } from "@/content/site";
 /* Cierre de conversión (docs/04 §8). */
 export function CTA() {
   return (
-    <section id="contacto" className="border-t border-rule bg-bg py-28">
+    <section id="contacto" className="border-t border-rule py-28">
       <Container>
         <Reveal>
           <div className="mx-auto max-w-3xl text-center">

@@ -15,12 +15,9 @@ export function ChatbotDemo() {
   const played = useRef(false);
 
   useEffect(() => {
-    if (!inView || played.current) return;
+    // reduced-motion no reproduce: se muestra la conversación completa (abajo)
+    if (!inView || played.current || reduce) return;
     played.current = true;
-    if (reduce) {
-      setVisibles(conversacion.length);
-      return;
-    }
     let cancel = false;
     const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
     (async () => {
@@ -69,7 +66,7 @@ export function ChatbotDemo() {
         className="flex h-[320px] flex-col gap-2 overflow-y-auto bg-bg-alt px-2 py-3"
         aria-label="Demostración de conversación con un agente de JADAI"
       >
-        {conversacion.slice(0, visibles).map((m, i) => (
+        {conversacion.slice(0, reduce ? conversacion.length : visibles).map((m, i) => (
           <div
             key={i}
             className={

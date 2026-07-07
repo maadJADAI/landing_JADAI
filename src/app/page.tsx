@@ -1,4 +1,5 @@
 import { Intro } from "@/components/sections/Intro";
+import { SiteBackground } from "@/components/interactive/SiteBackground";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { Hero } from "@/components/sections/Hero";
 import { Servicios } from "@/components/sections/Servicios";
@@ -63,8 +64,9 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd()) }}
       />
+      <SiteBackground />
       <Intro />
-      <main>
+      <main className="relative z-10">
         <SiteHeader />
         <Hero />
         <Servicios />
