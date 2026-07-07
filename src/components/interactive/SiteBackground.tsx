@@ -17,9 +17,6 @@ export function SiteBackground() {
       <div className="absolute inset-0 opacity-90">
         <Constellation density={26000} />
       </div>
-      {/* brillos de acento — profundidad atmosférica */}
-      <div className="absolute left-[-10%] top-[-12%] h-[55vh] w-[55vw] rounded-full bg-[radial-gradient(closest-side,var(--accent-wash),transparent_70%)] opacity-70" />
-      <div className="absolute bottom-[-15%] right-[-8%] h-[60vh] w-[50vw] rounded-full bg-[radial-gradient(closest-side,var(--accent-wash),transparent_70%)] opacity-50" />
       {/* viñeta: oscurece bordes para que el contenido respire */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_55%,rgba(0,0,0,.35)_100%)]" />
     </div>

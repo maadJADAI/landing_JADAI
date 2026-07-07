@@ -4,19 +4,19 @@ import { equipo } from "@/content/equipo";
 import { verticales } from "@/content/servicios";
 import { site } from "@/content/site";
 
-/* Footer oscuro (docs/04 §9), restilado a tokens; logo blanco (docs/01 §5). */
+/* Footer (docs/04 §9), restilado a tokens. */
 export function Footer() {
   return (
-    <footer className="relative z-10 border-t border-rule py-16 text-ink">
+    <footer className="relative z-10 border-t border-rule bg-bg-alt py-16 text-ink">
       <Container>
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
             <Image
-              src="/brand/jadai-logo-white.png"
+              src="/brand/jadai-logo.png"
               alt="JADAI"
               width={172}
               height={44}
-              className="h-9 w-auto"
+              className="h-12 w-auto sm:h-14"
             />
             <p className="mt-5 max-w-[32ch] text-sm leading-relaxed text-ink-2">
               {site.claim} IA aplicada desde {site.ciudad}.

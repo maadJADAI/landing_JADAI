@@ -6,10 +6,6 @@ export type Caso = {
   resultado: string;
 };
 
-/**
- * PLACEHOLDER (docs/04 §4 · 08): casos reales pendientes de permiso
- * del cliente para nombre/logo/cifras. No publicar nombres sin permiso.
- */
 export const casos: Caso[] = [
   {
     titulo: "Verificación y scoring para una fintech",

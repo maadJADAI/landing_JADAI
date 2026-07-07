@@ -11,6 +11,7 @@ import { Proceso } from "@/components/sections/Proceso";
 import { Faq } from "@/components/sections/Faq";
 import { CTA } from "@/components/sections/CTA";
 import { Footer } from "@/components/sections/Footer";
+import { ChatWidget } from "@/components/ui/ChatWidget";
 import { equipo } from "@/content/equipo";
 import { faq } from "@/content/faq";
 import { verticales } from "@/content/servicios";
@@ -79,6 +80,7 @@ export default function Home() {
         <CTA />
       </main>
       <Footer />
+      <ChatWidget />
     </>
   );
 }

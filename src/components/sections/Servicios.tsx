@@ -11,9 +11,8 @@ export function Servicios() {
     <section id="servicios" className="border-t border-rule py-24">
       <Container>
         <SectionHead
-          numero="01 · Servicios"
-          titulo="Tres verticales, un mismo estándar"
-          lede="Nos respaldamos en lo que ya construimos — sin bombardear con más."
+          titulo="Servicios que ofrecemos"
+          lede="Nos respaldamos en lo que ya construimos."
         />
         <div className="grid gap-6 lg:grid-cols-2">
           {verticales.map((v, i) => (

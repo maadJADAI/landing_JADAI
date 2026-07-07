@@ -26,7 +26,6 @@ export function Equipo() {
     <section id="equipo" className="border-t border-rule py-24">
       <Container>
         <SectionHead
-          numero="04 · Equipo"
           titulo="Team"
           lede="Ingenieros que se integran a tu equipo y responden con nombre y apellido."
         />

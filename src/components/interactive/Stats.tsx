@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { stats, statsNota, type Stat } from "@/content/stats";
+import { stats, type Stat } from "@/content/stats";
 import { useInView, useReducedMotion } from "@/lib/hooks";
 
 /* Contadores (docs/05·E): animan de 0 al valor al entrar en vista,
@@ -25,7 +25,7 @@ function Counter({ stat, play }: { stat: Stat; play: boolean }) {
   }, [play, reduce, stat.valor]);
 
   return (
-    <div className="border-l border-rule pl-5">
+    <div className="border-l border-rule-strong pl-5">
       <p className="text-display font-semibold tracking-[-.04em]">
         {stat.prefijo}
         {reduce ? stat.valor : n}
@@ -41,13 +41,12 @@ function Counter({ stat, play }: { stat: Stat; play: boolean }) {
 export function Stats() {
   const { ref, inView } = useInView<HTMLDivElement>(0.5);
   return (
-    <div ref={ref}>
-      <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+    <div ref={ref} className="rounded-md border border-rule bg-bg-alt/80 p-8 sm:p-10">
+      <div className="grid gap-10 sm:grid-cols-3">
         {stats.map((s) => (
           <Counter key={s.label} stat={s} play={inView} />
         ))}
       </div>
-      <p className="mt-8 font-mono text-[11px] text-muted">{statsNota}</p>
     </div>
   );
 }

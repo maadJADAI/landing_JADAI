@@ -4,11 +4,9 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { agendarHref } from "@/content/site";
+import { OpenChatButton } from "@/components/ui/OpenChatButton";
+import { cn } from "@/lib/utils";
 
-/* Top bar editorial (docs/04 §1), adaptado del bloque hero-section-9:
-   logo + nav mono + CTA; menú hamburguesa en móvil. */
 const menuItems = [
   { name: "Servicios", href: "#servicios" },
   { name: "Trabajo", href: "#trabajo" },
@@ -18,26 +16,43 @@ const menuItems = [
 
 export function SiteHeader() {
   const [open, setOpen] = React.useState(false);
+  const [hidden, setHidden] = React.useState(false);
+  const lastY = React.useRef(0);
+
+  React.useEffect(() => {
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      const scrollingDown = currentY > lastY.current;
+
+      setHidden(scrollingDown && currentY > window.innerHeight * 0.35);
+      lastY.current = currentY;
+    };
+
+    lastY.current = window.scrollY;
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="relative z-30 border-b border-rule bg-bg/90 backdrop-blur-sm">
+    <header
+      className={cn(
+        "sticky top-0 z-40 border-b border-rule bg-bg/90 backdrop-blur-sm transition-transform duration-300",
+        hidden && !open ? "-translate-y-full" : "translate-y-0",
+      )}
+    >
       <div className="mx-auto flex max-w-[1180px] flex-wrap items-center justify-between gap-4 px-6 py-5 sm:px-10">
-        <Link href="/" aria-label="JADAI — inicio" className="flex items-center">
-          {/* logo de marca — la versión blanca es la única con fondo transparente */}
+        <Link href="/" aria-label="JADAI - inicio" className="flex items-center">
           <Image
             src="/brand/jadai-logo-white.png"
             alt="JADAI"
             width={172}
             height={44}
             priority
-            className="h-7 w-auto sm:h-8"
+            className="h-11 w-auto sm:h-12"
           />
         </Link>
 
-        <nav
-          aria-label="Principal"
-          className="hidden items-center gap-8 lg:flex"
-        >
+        <nav aria-label="Principal" className="hidden items-center gap-8 lg:flex">
           {menuItems.map((item) => (
             <a
               key={item.href}
@@ -50,14 +65,12 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-6 lg:flex">
-          <Button asChild size="sm">
-            <a href={agendarHref()}>Agenda una llamada</a>
-          </Button>
+          <OpenChatButton size="sm">Agenda una llamada</OpenChatButton>
         </div>
 
         <button
           onClick={() => setOpen(!open)}
-          aria-label={open ? "Cerrar menú" : "Abrir menú"}
+          aria-label={open ? "Cerrar menu" : "Abrir menu"}
           aria-expanded={open}
           className="-m-2 p-2 lg:hidden"
         >
@@ -80,9 +93,9 @@ export function SiteHeader() {
               ))}
             </ul>
             <div className="mt-6 flex items-center justify-end gap-4 pb-2">
-              <Button asChild size="sm">
-                <a href={agendarHref()}>Agendar</a>
-              </Button>
+              <OpenChatButton size="sm" onClick={() => setOpen(false)}>
+                Agendar
+              </OpenChatButton>
             </div>
           </div>
         ) : null}

@@ -10,9 +10,8 @@ export function Demo() {
     <section id="demo" className="border-t border-rule py-24">
       <Container>
         <SectionHead
-          numero="02 · Producto"
-          titulo="Lo que construimos, funcionando"
-          lede="Un agente real respondiendo la operación diaria de una camaronera."
+          titulo="Lo que hemos construido"
+          lede="Un agente real en operación diaria"
         />
         <div className="grid items-center gap-14 lg:grid-cols-2">
           <Reveal>
@@ -36,9 +35,6 @@ export function Demo() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
-                Guion demostrativo — datos ilustrativos
-              </p>
             </div>
           </Reveal>
           <Reveal delay={120}>

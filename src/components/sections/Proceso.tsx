@@ -1,18 +1,13 @@
 import { Container } from "@/components/ui/Container";
-import { SectionHead } from "@/components/ui/SectionHead";
 import { Reveal } from "@/components/ui/Reveal";
+import { SectionHead } from "@/components/ui/SectionHead";
 import { proceso } from "@/content/proceso";
 
-/* Cómo trabajamos (docs/04 §7): 3 pasos con hairlines. */
 export function Proceso() {
   return (
     <section id="proceso" className="border-t border-rule py-24">
       <Container>
-        <SectionHead
-          numero="05 · Enfoque"
-          titulo="Cómo trabajamos"
-          lede="Tres pasos. Cero humo."
-        />
+        <SectionHead titulo="Cómo trabajamos" />
         <div className="grid gap-10 sm:grid-cols-3">
           {proceso.map((p, i) => (
             <Reveal key={p.numero} delay={i * 80}>

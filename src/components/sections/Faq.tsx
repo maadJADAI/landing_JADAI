@@ -8,7 +8,6 @@ export function Faq() {
     <section id="faq" className="border-t border-rule py-24">
       <Container>
         <SectionHead
-          numero="06 · Preguntas"
           titulo="Preguntas frecuentes"
         />
         <div className="mx-auto max-w-3xl divide-y divide-rule border-y border-rule">
