@@ -26,6 +26,11 @@ export function Intro() {
 
   useEffect(() => {
     if (!ref.current) return;
+    // degradar al motivo plano si no hay WebGL (docs/05·C)
+    const probe = document.createElement("canvas");
+    const gl =
+      probe.getContext("webgl2") ?? probe.getContext("webgl");
+    if (!gl) return;
     setColors({
       wire: readToken(ref.current, "--text"),
       point: readToken(ref.current, "--accent"),
