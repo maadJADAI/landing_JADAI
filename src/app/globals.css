@@ -55,3 +55,24 @@ body{ background:var(--bg); color:var(--text); font-family:var(--font-sans); -we
 .text-display{ font-size:clamp(32px,5vw,64px); line-height:1.05; letter-spacing:-.04em; }
 .text-title{ font-size:clamp(26px,3.4vw,40px); line-height:1.2; letter-spacing:-.02em; }
 .text-lead{ font-size:clamp(18px,1.7vw,23px); line-height:1.2; }
+
+/* anclas con aire al hacer scroll desde el nav */
+section[id]{ scroll-margin-top:16px; }
+
+/* marquee del intro (docs/05·A): loop sin salto, track duplicado */
+.marquee-track{ animation:marquee 46s linear infinite; }
+@keyframes marquee{ to{ transform:translateX(-50%); } }
+
+/* puntos de "escribiendo…" del chatbot demo (docs/05·D) */
+.typing-dot{
+  display:block; width:6px; height:6px; border-radius:999px;
+  background:var(--on-accent); opacity:.5;
+  animation:typing-blink .9s ease-in-out infinite;
+}
+@keyframes typing-blink{ 50%{ opacity:1; transform:translateY(-1.5px); } }
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  .marquee-track{ animation:none; }
+  .typing-dot{ animation:none; }
+}

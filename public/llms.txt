@@ -1,0 +1,22 @@
+# JADAI
+
+> Estudio de IA aplicada en Guayaquil, Ecuador. Construimos agentes, chatbots y modelos a medida que operan en producción y generan resultados — "IA que factura". B2B.
+
+## Qué hacemos
+
+- **Fintech**: automatización para el sistema financiero — agentes de atención y cobranza, verificación de identidad y scoring, procesamiento de documentos KYC.
+- **Agro**: IA para el campo, hoy acuicultura (camaroneras) — visión por computadora, predicción de crecimiento y alimento, reportes automáticos por WhatsApp.
+- **Agentes**: procesos repetitivos convertidos en agentes que trabajan 24/7 — agentes de WhatsApp para ventas y soporte, automatización de back-office, orquestación multi-agente (LangGraph).
+
+## Cómo trabajamos
+
+1. Agenda: una llamada de 30 minutos para entender la operación.
+2. Nos integramos al equipo del cliente, con sus sistemas y datos.
+3. Enviamos producto en producción en iteraciones cortas.
+
+## Datos
+
+- Sede: Guayaquil, Ecuador. Área de servicio: Ecuador y Latinoamérica.
+- Equipo: Luis Abrahan Cedeño (AI Software Engineer, sistemas agénticos), Cristian Intriago (automatización), Jandony Guzmán (AI Solutions Engineer, fintech y visión por computadora; ganador del 1er Hackathon de IA de Ecuador).
+- Contacto: lacedeno@jadai.biz
+- Web: https://jadai.biz

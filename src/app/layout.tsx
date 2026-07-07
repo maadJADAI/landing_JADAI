@@ -28,12 +28,29 @@ export const metadata: Metadata = {
   },
   description:
     "Construimos IA que factura. Agentes, chatbots y modelos a medida para fintech, agro y más. Estudio de IA en Guayaquil, Ecuador.",
+  keywords: [
+    "IA Ecuador",
+    "agentes de IA",
+    "chatbots WhatsApp",
+    "IA fintech",
+    "IA acuicultura",
+    "estudio de IA Guayaquil",
+  ],
+  alternates: { canonical: "/" },
   openGraph: {
     title: "JADAI — Estudio de IA aplicada",
     description:
       "Construimos IA que factura. Agentes, chatbots y modelos a medida.",
+    url: "https://jadai.biz",
+    siteName: "JADAI",
     locale: "es_EC",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "JADAI — Estudio de IA aplicada",
+    description:
+      "Construimos IA que factura. Agentes, chatbots y modelos a medida.",
   },
 };
 
