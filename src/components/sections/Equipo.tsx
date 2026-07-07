@@ -39,7 +39,7 @@ export function Equipo() {
                     alt={`Retrato de ${p.nombre}`}
                     width={400}
                     height={400}
-                    className="aspect-square w-full object-cover grayscale transition-[filter,transform] duration-500 group-hover:scale-[1.02] group-hover:grayscale-0 motion-reduce:transition-none"
+                    className="aspect-square w-full object-cover transition-[filter,transform] duration-500 group-hover:scale-[1.02] lg:grayscale lg:group-hover:grayscale-0 motion-reduce:transition-none"
                   />
                 </div>
                 <div className="mt-4">
