@@ -1,26 +1,57 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   JADAI — tokens (fuente de verdad: docs/01-SISTEMA-DE-DISENO.md)
+   Primitivos → semánticos. Tema claro por defecto; el intro usa
+   [data-theme="dark"]. Nada de hex suelto en componentes.
+   ============================================================ */
+:root{
+  /* neutros · papel + tinta */
+  --c-paper:#FAF8F3; --c-paper-2:#F1EEE6; --c-paper-3:#E7E3D8;
+  --c-ink:#17161A; --c-ink-2:#403F45; --c-ink-3:#7C7A82; --c-white:#FFFFFF;
+  --c-hair:rgba(23,22,26,.14); --c-hair-strong:rgba(23,22,26,.30);
+  /* acento · cian de marca */
+  --c-cyan:#0FB2C6; --c-cyan-deep:#076A75; --c-cyan-wash:#DDEFF1;
+  /* verticales */
+  --agents-100:#FFB74D; --agents-200:#FF9E3D; --agents-300:#FF8F26; --agents-400:#FF7D00; --agents-500:#E66A00; --agents-600:#C55A00;
+  --fintech-100:#B3CDE0; --fintech-200:#7A9EC2; --fintech-300:#4A7C9D; --fintech-400:#2B4F6E; --fintech-500:#1C3C54;
+  --agro-100:#D9E8D2; --agro-200:#B5C9B0; --agro-300:#8DA88D; --agro-400:#63956A; --agro-500:#4B7B52; --agro-600:#2F5A3A; --agro-700:#1F3B28;
+
+  /* semánticos · tema claro */
+  --bg:var(--c-paper); --bg-alt:var(--c-paper-2); --panel:var(--c-white); --tint:var(--c-paper-3);
+  --text:var(--c-ink); --text-2:var(--c-ink-2); --text-muted:var(--c-ink-3);
+  --rule:var(--c-hair); --rule-strong:var(--c-hair-strong);
+  --accent:var(--c-cyan); --accent-ink:var(--c-cyan-deep); --accent-wash:var(--c-cyan-wash); --on-accent:var(--c-ink);
+  --focus-ring:var(--c-cyan-deep);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Acto 1 (intro) / oscuro: reasigna SOLO semánticos */
+[data-theme="dark"]{
+  --bg:#0F0E12; --bg-alt:#141319; --panel:#1A1922; --tint:#24232E;
+  --text:#F4F2EC; --text-2:#C7C5CE; --text-muted:#8E8B95;
+  --rule:rgba(255,255,255,.10); --rule-strong:rgba(255,255,255,.18);
+  --accent:#22CCE6; --accent-ink:#3FE0F5; --accent-wash:#0E2A30; --on-accent:#0F0E12;
+  --focus-ring:#3FE0F5;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* expone tokens como utilidades Tailwind: bg-bg, text-ink, border-rule, text-accent-ink, text-agents… */
+@theme inline{
+  --color-bg:var(--bg); --color-bg-alt:var(--bg-alt); --color-panel:var(--panel); --color-tint:var(--tint);
+  --color-ink:var(--text); --color-ink-2:var(--text-2); --color-muted:var(--text-muted);
+  --color-rule:var(--rule); --color-rule-strong:var(--rule-strong);
+  --color-accent:var(--accent); --color-accent-ink:var(--accent-ink); --color-accent-wash:var(--accent-wash); --color-on-accent:var(--on-accent);
+  --color-agents:var(--agents-400); --color-fintech:var(--fintech-400); --color-agro:var(--agro-500);
+  --font-sans:var(--font-general-sans); --font-mono:var(--font-jetbrains-mono);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{ background:var(--bg); color:var(--text); font-family:var(--font-sans); -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+::selection{ background:var(--accent); color:var(--on-accent); }
+:where(a,button):focus-visible{ outline:2px solid var(--focus-ring); outline-offset:3px; }
+
+/* escala tipográfica fluida (clases planas — robustas en Tailwind v4) */
+.text-hero{ font-size:clamp(46px,8.5vw,112px); line-height:.96; letter-spacing:-.04em; }
+.text-display{ font-size:clamp(32px,5vw,64px); line-height:1.05; letter-spacing:-.04em; }
+.text-title{ font-size:clamp(26px,3.4vw,40px); line-height:1.2; letter-spacing:-.02em; }
+.text-lead{ font-size:clamp(18px,1.7vw,23px); line-height:1.2; }

@@ -1,65 +1,97 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className="min-h-dvh bg-bg font-sans text-ink">
+      <div className="mx-auto max-w-[1180px] px-6 sm:px-10">
+        {/* top bar */}
+        <header className="flex items-center justify-between border-b border-rule py-6">
+          <span className="text-[22px] font-semibold tracking-tight">
+            JAD<span className="text-accent-ink">A</span>I
+          </span>
+          <nav className="hidden gap-6 font-mono text-xs uppercase tracking-[0.12em] text-ink-2 sm:flex">
+            <a href="#" className="hover:text-accent-ink">Servicios</a>
+            <a href="#" className="hover:text-accent-ink">Trabajo</a>
+            <a href="#" className="hover:text-accent-ink">Enfoque</a>
+            <a href="#" className="hover:text-accent-ink">Contacto</a>
+          </nav>
+          <span className="font-mono text-xs uppercase tracking-[0.12em] text-muted">
+            Guayaquil, EC
+          </span>
+        </header>
+
+        {/* hero */}
+        <section className="py-16 sm:py-24">
+          <h1 className="text-hero max-w-[14ch] font-semibold">
+            Construimos IA que <span className="text-accent-ink">factura</span>.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
+          <div className="mt-12 grid gap-10 sm:grid-cols-[1.4fr_1fr] sm:items-end">
+            <p className="text-lead max-w-[46ch] text-ink-2">
+              Agentes, chatbots y modelos a medida. Nos integramos a tu equipo y
+              enviamos producto real — no slides.
+            </p>
+            <div className="font-mono text-xs leading-7 tracking-[0.12em] text-muted sm:text-right">
+              FINTECH · AGRO · AGENTES
+              <br />
+              GUAYAQUIL, ECUADOR
+              <br />
+              ESTUDIO DE IA
+            </div>
+          </div>
+
+          <div className="mt-12 flex flex-wrap gap-4">
             <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              href="#"
+              className="inline-flex items-center gap-2 rounded-[3px] bg-ink px-6 py-3 text-sm font-medium text-bg transition-colors hover:bg-accent-ink hover:text-white"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
+              Agenda una llamada <span aria-hidden>↗</span>
+            </a>
             <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              href="#"
+              className="inline-flex items-center rounded-[3px] bg-accent px-6 py-3 text-sm font-semibold text-on-accent"
             >
-              Learning
-            </a>{" "}
-            center.
+              Hablar con un agente
+            </a>
+            <a
+              href="#"
+              className="inline-flex items-center rounded-[3px] border border-rule-strong px-6 py-3 text-sm font-medium text-ink transition-colors hover:border-ink"
+            >
+              Ver trabajo
+            </a>
+          </div>
+        </section>
+
+        {/* verticales */}
+        <section className="border-t border-rule py-10">
+          <div className="grid gap-px overflow-hidden rounded-[3px] border border-rule bg-rule sm:grid-cols-3">
+            <div className="bg-panel p-6">
+              <span className="font-mono text-xs text-muted">01</span>
+              <h3 className="text-title mt-3 font-medium">Fintech</h3>
+              <span
+                className="mt-3 block h-1 w-16 rounded-full"
+                style={{ background: "var(--fintech-400)" }}
+              />
+            </div>
+            <div className="bg-panel p-6">
+              <span className="font-mono text-xs text-muted">02</span>
+              <h3 className="text-title mt-3 font-medium">Agro</h3>
+              <span
+                className="mt-3 block h-1 w-16 rounded-full"
+                style={{ background: "var(--agro-500)" }}
+              />
+            </div>
+            <div className="bg-panel p-6">
+              <span className="font-mono text-xs text-muted">03</span>
+              <h3 className="text-title mt-3 font-medium">Agentes</h3>
+              <span
+                className="mt-3 block h-1 w-16 rounded-full"
+                style={{ background: "var(--agents-400)" }}
+              />
+            </div>
+          </div>
+          <p className="mt-6 font-mono text-xs uppercase tracking-[0.12em] text-muted">
+            base v0.1 · sistema de diseño aplicado
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+        </section>
+      </div>
+    </main>
   );
 }
