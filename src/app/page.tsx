@@ -1,4 +1,5 @@
 import { Intro } from "@/components/sections/Intro";
+import { IntroSnap } from "@/components/interactive/IntroSnap";
 import { SiteBackground } from "@/components/interactive/SiteBackground";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { Hero } from "@/components/sections/Hero";
@@ -67,7 +68,8 @@ export default function Home() {
       />
       <SiteBackground />
       <Intro />
-      <main className="relative z-10">
+      <IntroSnap />
+      <main id="contenido" className="relative z-10">
         <SiteHeader />
         <Hero />
         <Servicios />

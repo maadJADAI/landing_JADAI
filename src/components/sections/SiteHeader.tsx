@@ -20,11 +20,19 @@ export function SiteHeader() {
   const lastY = React.useRef(0);
 
   React.useEffect(() => {
+    const main = document.getElementById("contenido");
     const onScroll = () => {
       const currentY = window.scrollY;
       const scrollingDown = currentY > lastY.current;
+      // el umbral se mide desde el inicio del contenido, no desde la intro:
+      // en el tope (header + hero) el header queda siempre visible
+      const contentTop = main
+        ? main.getBoundingClientRect().top + currentY
+        : 0;
 
-      setHidden(scrollingDown && currentY > window.innerHeight * 0.35);
+      setHidden(
+        scrollingDown && currentY > contentTop + window.innerHeight * 0.35,
+      );
       lastY.current = currentY;
     };
 

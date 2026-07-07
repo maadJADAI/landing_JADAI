@@ -37,8 +37,10 @@ export function Intro() {
   }, []);
 
   const explorar = () => {
+    // el tope del contenido es <main id="contenido"> (header + hero),
+    // el mismo punto de reposo que usa IntroSnap
     document
-      .getElementById("hero")
+      .getElementById("contenido")
       ?.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
   };
 
