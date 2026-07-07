@@ -3,13 +3,17 @@
 import { useEffect } from "react";
 
 /* Snap de dos zonas entre la intro (acto 1) y el contenido (acto 2).
-   La página nunca descansa a medio camino dentro de la intro: un gesto
-   de scroll en la frontera dispara el viaje completo en ambos sentidos.
-   El tope "real" del contenido es el inicio de <main id="contenido">
-   (header + hero); más arriba de eso, se vuelve entero a la intro. */
+   La página nunca descansa a medio camino dentro de la intro: el tope
+   "real" del contenido es el inicio de <main id="contenido"> (header +
+   hero); más arriba de eso, se vuelve entero a la intro.
+
+   Desktop (rueda): un gesto en la frontera dispara el viaje completo.
+   Táctil: el scroll nativo NUNCA se intercepta (ningún listener táctil
+   no-pasivo — bloquear touchmove es lo que produce lag en iOS Safari);
+   el viaje se completa solo al soltar el dedo o al morir la inercia. */
 
 const EDGE = 8; // tolerancia en px alrededor de los puntos de reposo
-const SETTLE_MS = 140; // pausa que consideramos "scroll asentado"
+const SETTLE_MS = 180; // pausa que consideramos "scroll asentado"
 const INERTIA_GAP_MS = 160; // gap máximo entre eventos de una misma inercia
 const DURATION_MS = 700;
 
@@ -37,34 +41,52 @@ export function IntroSnap() {
     // con motion reducido no secuestramos el scroll (docs/05·C)
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    const html = document.documentElement;
     let animating = false;
     let raf = 0;
     let settleTimer = 0;
     let lastY = window.scrollY;
     let lastDir = 0;
-    let swallowing = false; // tragar la cola de inercia tras una animación
+    let swallowing = false; // tragar la cola de inercia de rueda tras animar
     let lastWheelT = 0;
     let scrollbarDrag = false;
+    let touchActive = false; // jamás animar con el dedo en pantalla
     // la red de asentamiento solo se arma tras un gesto real del usuario;
     // los layout shifts de la carga no deben disparar el snap
     let armed = false;
 
-    const boundary = () =>
-      Math.round(main.getBoundingClientRect().top + window.scrollY);
+    // frontera cacheada: medirla en cada evento fuerza layout en pleno
+    // scroll; se recalcula solo cuando cambia el tamaño del documento
+    let boundary = 0;
+    const measure = () => {
+      boundary = Math.round(main.getBoundingClientRect().top + window.scrollY);
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(document.body);
 
-    const animateTo = (target: number) => {
-      animating = true;
+    const stopAnim = () => {
       cancelAnimationFrame(raf);
+      animating = false;
+      html.style.scrollBehavior = "";
+    };
+
+    const animateTo = (getTarget: () => number) => {
+      stopAnim();
+      animating = true;
+      // sin esto, cada scrollTo del rAF relanzaría el scroll-behavior:smooth
+      // global y la animación se vuelve gomosa
+      html.style.scrollBehavior = "auto";
       const from = window.scrollY;
-      const dist = target - from;
       const start = performance.now();
       const step = (now: number) => {
         const t = Math.min(1, (now - start) / DURATION_MS);
-        window.scrollTo(0, from + dist * easeInOutCubic(t));
+        // target vivo: en iOS la barra del navegador puede mover la frontera
+        window.scrollTo(0, from + (getTarget() - from) * easeInOutCubic(t));
         if (t < 1) {
           raf = requestAnimationFrame(step);
         } else {
-          animating = false;
+          stopAnim();
           swallowing = true;
           lastWheelT = performance.now();
         }
@@ -88,51 +110,37 @@ export function IntroSnap() {
         swallowing = false;
       }
       lastWheelT = now;
-      if (insideScrollable(e.target)) return;
       const y = window.scrollY;
-      const b = boundary();
-      if (e.deltaY < 0 && y > EDGE && y <= b + EDGE) {
-        e.preventDefault();
-        animateTo(0);
-      } else if (e.deltaY > 0 && y < b - EDGE) {
-        e.preventDefault();
-        animateTo(b);
-      }
+      const up = e.deltaY < 0 && y > EDGE && y <= boundary + EDGE;
+      const down = e.deltaY > 0 && y < boundary - EDGE;
+      if (!up && !down) return;
+      if (insideScrollable(e.target)) return;
+      e.preventDefault();
+      animateTo(up ? () => 0 : () => boundary);
     };
 
-    let touchStartY = 0;
-    const onTouchStart = (e: TouchEvent) => {
+    // Táctil: solo observamos. Tocar la pantalla devuelve el control al
+    // usuario (cancela la animación); al soltar, el settle completa el viaje.
+    const onTouchStart = () => {
       armed = true;
-      touchStartY = e.touches[0].clientY;
+      touchActive = true;
+      if (animating) stopAnim();
+      clearTimeout(settleTimer);
     };
-    const onTouchMove = (e: TouchEvent) => {
-      if (animating) {
-        e.preventDefault();
-        return;
-      }
-      if (insideScrollable(e.target)) return;
-      const dy = touchStartY - e.touches[0].clientY; // >0 = bajando
-      if (Math.abs(dy) < 6) return;
-      const y = window.scrollY;
-      const b = boundary();
-      if (dy < 0 && y > EDGE && y <= b + EDGE) {
-        e.preventDefault();
-        animateTo(0);
-      } else if (dy > 0 && y < b - EDGE) {
-        e.preventDefault();
-        animateTo(b);
-      }
+    const onTouchEnd = () => {
+      touchActive = false;
+      clearTimeout(settleTimer);
+      settleTimer = window.setTimeout(settle, SETTLE_MS);
     };
 
-    // Red de seguridad para inercia táctil, teclado y scrollbar: si el
-    // scroll se asienta dentro de la intro (ni arriba ni en el contenido),
+    // Red de asentamiento (único disparador en táctil; en desktop cubre
+    // teclado y scrollbar): si el scroll queda varado dentro de la intro,
     // completar el viaje hacia donde iba.
     const settle = () => {
-      if (!armed || animating || scrollbarDrag) return;
-      const b = boundary();
+      if (!armed || animating || touchActive || scrollbarDrag) return;
       const pos = window.scrollY;
-      if (pos > EDGE && pos < b - EDGE) {
-        animateTo(lastDir < 0 ? 0 : b);
+      if (pos > EDGE && pos < boundary - EDGE) {
+        animateTo(lastDir < 0 ? () => 0 : () => boundary);
       }
     };
     const onScroll = () => {
@@ -173,17 +181,20 @@ export function IntroSnap() {
 
     window.addEventListener("wheel", onWheel, { passive: false });
     window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchmove", onTouchMove, { passive: false });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
+    window.addEventListener("touchcancel", onTouchEnd, { passive: true });
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("keydown", onKeyDown);
     window.addEventListener("mousedown", onMouseDown);
     window.addEventListener("mouseup", onMouseUp);
     return () => {
-      cancelAnimationFrame(raf);
+      stopAnim();
       clearTimeout(settleTimer);
+      ro.disconnect();
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+      window.removeEventListener("touchcancel", onTouchEnd);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("mousedown", onMouseDown);

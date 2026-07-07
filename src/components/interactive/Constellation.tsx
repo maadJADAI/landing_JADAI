@@ -6,7 +6,8 @@ import { hexToRgb, readToken, cn } from "@/lib/utils";
 /* Constelación reactiva (docs/05·B) — motivo de marca nodo+línea.
    Portada del design-system.html. Colores leídos de los tokens del
    contexto ([data-theme]); pausa fuera de viewport; en reduced-motion
-   se dibuja estática una sola vez. */
+   y en pantallas táctiles se dibuja estática una sola vez — dos capas
+   full-screen a 60fps compiten con el compositor del scroll en móvil. */
 export function Constellation({
   className,
   density = 16000,
@@ -22,7 +23,9 @@ export function Constellation({
     const ctx = cv.getContext("2d");
     if (!ctx) return;
 
-    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const coarse = matchMedia("(pointer: coarse)").matches;
+    const reduce =
+      matchMedia("(prefers-reduced-motion: reduce)").matches || coarse;
     const ink = hexToRgb(readToken(cv, "--text") || "#17161A");
     const cyan = hexToRgb(readToken(cv, "--accent") || "#0FB2C6");
 
@@ -48,12 +51,18 @@ export function Constellation({
       }
     }
 
+    let lastW = 0;
     function resize() {
       const dpr = Math.min(devicePixelRatio || 1, 2);
       cv!.width = cv!.clientWidth * dpr;
       cv!.height = cv!.clientHeight * dpr;
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
-      build();
+      // en iOS colapsar la barra dispara resize solo de alto: no
+      // re-randomizar los nodos en pleno scroll
+      if (cv!.clientWidth !== lastW) {
+        lastW = cv!.clientWidth;
+        build();
+      }
       if (reduce) draw();
     }
 
@@ -142,16 +151,22 @@ export function Constellation({
     resize();
     io.observe(cv);
     addEventListener("resize", resize);
-    addEventListener("pointermove", onMove);
-    addEventListener("pointerleave", onLeave);
+    // el brillo que sigue al puntero es cosa de mouse; en táctil los
+    // pointermove del drag forzarían layout (getBoundingClientRect) por evento
+    if (!coarse) {
+      addEventListener("pointermove", onMove);
+      addEventListener("pointerleave", onLeave);
+    }
     if (reduce) draw();
 
     return () => {
       stop();
       io.disconnect();
       removeEventListener("resize", resize);
-      removeEventListener("pointermove", onMove);
-      removeEventListener("pointerleave", onLeave);
+      if (!coarse) {
+        removeEventListener("pointermove", onMove);
+        removeEventListener("pointerleave", onLeave);
+      }
     };
   }, [density]);
 

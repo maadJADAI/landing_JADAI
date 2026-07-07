@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useInView } from "@/lib/hooks";
@@ -57,11 +57,19 @@ export default function Node3D({
   pointColor?: string;
 }) {
   const { ref, inView } = useInView<HTMLDivElement>(0.05, false);
+  // en táctil, bajar el techo de dpr: a 2x el canvas cuesta scroll fluido.
+  // Este componente es ssr:false, así que matchMedia existe al montar.
+  const [maxDpr] = useState(() =>
+    typeof matchMedia !== "undefined" &&
+    matchMedia("(pointer: coarse)").matches
+      ? 1.5
+      : 2,
+  );
   return (
     <div ref={ref} className={cn("h-full w-full", className)} aria-hidden="true">
       <Canvas
         frameloop={inView ? "always" : "never"}
-        dpr={[1, 2]}
+        dpr={[1, maxDpr]}
         camera={{ position: [0, 0, 3.5], fov: 45 }}
         gl={{ alpha: true, antialias: true }}
       >

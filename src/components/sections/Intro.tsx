@@ -48,7 +48,9 @@ export function Intro() {
     <section
       ref={ref}
       data-theme="dark"
-      className="relative z-10 flex min-h-dvh flex-col overflow-hidden text-ink"
+      /* svh y no dvh: la altura no cambia cuando Safari iOS colapsa la barra,
+         así la frontera del snap y el layout no se mueven en pleno scroll */
+      className="relative z-10 flex min-h-svh flex-col overflow-hidden text-ink"
       aria-label="Introducción"
     >
       {/* nodo 3D — sutil, detrás del contenido; 1 sola instancia (docs/05) */}

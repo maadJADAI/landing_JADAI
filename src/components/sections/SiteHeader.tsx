@@ -21,14 +21,22 @@ export function SiteHeader() {
 
   React.useEffect(() => {
     const main = document.getElementById("contenido");
+    // el umbral se mide desde el inicio del contenido, no desde la intro:
+    // en el tope (header + hero) el header queda siempre visible. Se cachea
+    // para no forzar layout (getBoundingClientRect) en cada scroll.
+    let contentTop = 0;
+    const measure = () => {
+      contentTop = main
+        ? main.getBoundingClientRect().top + window.scrollY
+        : 0;
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(document.body);
+
     const onScroll = () => {
       const currentY = window.scrollY;
       const scrollingDown = currentY > lastY.current;
-      // el umbral se mide desde el inicio del contenido, no desde la intro:
-      // en el tope (header + hero) el header queda siempre visible
-      const contentTop = main
-        ? main.getBoundingClientRect().top + currentY
-        : 0;
 
       setHidden(
         scrollingDown && currentY > contentTop + window.innerHeight * 0.35,
@@ -38,7 +46,10 @@ export function SiteHeader() {
 
     lastY.current = window.scrollY;
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   return (
