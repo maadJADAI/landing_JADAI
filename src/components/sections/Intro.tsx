@@ -4,47 +4,65 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useReducedMotion } from "@/lib/hooks";
 
-const columns = [
+type CollageItem = {
+  src: string;
+  width: number;
+  height: number;
+};
+
+const columns: CollageItem[][] = [
   [
-    { src: "/fotos-frases/frase-01.png", height: "54%" },
-    { src: "/fotos-frases/nyse-11.png", height: "46%" },
+    { src: "/fotos-frases/frase-01.png", width: 480, height: 360 },
+    { src: "/fotos-frases/nyse-11.png", width: 480, height: 360 },
+    { src: "/fotos-frases/frase-06.png", width: 480, height: 480 },
+    { src: "/fotos-frases/gadsden-12.png", width: 480, height: 480 },
   ],
   [
-    { src: "/fotos-frases/churchill-09.png", height: "62%" },
-    { src: "/fotos-frases/gadsden-12.png", height: "38%" },
+    { src: "/fotos-frases/churchill-09.png", width: 480, height: 720 },
+    { src: "/fotos-frases/frase-08.png", width: 600, height: 450 },
+    { src: "/fotos-frases/symbol-13.png", width: 480, height: 720 },
   ],
   [
-    { src: "/fotos-frases/frase-02.png", height: "36%" },
-    { src: "/fotos-frases/frase-03.png", height: "64%" },
+    { src: "/fotos-frases/frase-02.png", width: 600, height: 450 },
+    { src: "/fotos-frases/frase-03.png", width: 480, height: 480 },
+    { src: "/fotos-frases/libertad-10.png", width: 480, height: 720 },
   ],
   [
-    { src: "/fotos-frases/libertad-10.png", height: "58%" },
-    { src: "/fotos-frases/frase-04.png", height: "42%" },
+    { src: "/fotos-frases/libertad-10.png", width: 480, height: 720 },
+    { src: "/fotos-frases/frase-04.png", width: 480, height: 720 },
+    { src: "/fotos-frases/nyse-11.png", width: 480, height: 360 },
   ],
   [
-    { src: "/fotos-frases/frase-06.png", height: "48%" },
-    { src: "/fotos-frases/symbol-13.png", height: "52%" },
+    { src: "/fotos-frases/frase-07.png", width: 600, height: 900 },
+    { src: "/fotos-frases/gadsden-12.png", width: 480, height: 480 },
+    { src: "/fotos-frases/frase-01.png", width: 480, height: 360 },
   ],
   [
-    { src: "/fotos-frases/frase-07.png", height: "44%" },
-    { src: "/fotos-frases/frase-08.png", height: "56%" },
+    { src: "/fotos-frases/symbol-13.png", width: 480, height: 720 },
+    { src: "/fotos-frases/frase-06.png", width: 480, height: 480 },
+    { src: "/fotos-frases/frase-02.png", width: 600, height: 450 },
   ],
 ];
 
 function CollageImage({
   src,
+  width,
+  height,
   preload,
 }: {
   src: string;
+  width: number;
+  height: number;
   preload?: boolean;
 }) {
   return (
     <Image
       src={src}
       alt=""
-      fill
+      width={width}
+      height={height}
       sizes="(min-width: 1024px) 480px, 72vw"
-      className="object-cover"
+      className="block h-auto w-full"
       preload={preload || undefined}
       loading={preload ? undefined : "lazy"}
     />
@@ -60,16 +78,17 @@ function IntroCollage() {
         {sequence.map((column, columnIndex) => (
           <div
             key={`${columnIndex}-${column[0].src}`}
-            className="h-full w-[clamp(280px,32vw,480px)] shrink-0"
+            className="min-h-full w-[clamp(320px,32vw,480px)] shrink-0"
           >
             {column.map((image, imageIndex) => (
               <div
                 key={image.src}
-                className="relative w-full overflow-hidden"
-                style={{ height: image.height }}
+                className="w-full overflow-hidden"
               >
                 <CollageImage
                   src={image.src}
+                  width={image.width}
+                  height={image.height}
                   preload={columnIndex < 4 && imageIndex === 0}
                 />
               </div>
@@ -110,22 +129,22 @@ export function Intro() {
     >
       <IntroCollage />
 
-      <div className="relative z-10 flex flex-1 flex-col">
-        <div className="flex flex-col items-center gap-5 px-6 pt-[14vh] text-center">
+      <div className="relative z-10 flex flex-1 flex-col lg:justify-center">
+        <div className="flex flex-col items-center gap-5 px-6 pt-[14vh] text-center lg:pt-0">
           <Image
             src="/brand/jadai-logo-white.png"
             alt="JADAI"
             width={274}
             height={70}
             priority
-            className="h-12 w-auto sm:h-16"
+            className="h-14 w-auto sm:h-16 lg:h-24 xl:h-28"
           />
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
             IA aplicada / Ecuador
           </p>
         </div>
 
-        <div className="my-auto min-h-[18vh]" aria-hidden="true" />
+        <div className="my-auto min-h-[18vh] lg:my-0 lg:min-h-12" aria-hidden="true" />
 
         <div className="flex flex-col items-center gap-6 pb-12">
           <Button variant="accent" size="lg" onClick={explorar}>
