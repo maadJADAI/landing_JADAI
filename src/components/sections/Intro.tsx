@@ -78,7 +78,7 @@ function IntroCollage() {
         {sequence.map((column, columnIndex) => (
           <div
             key={`${columnIndex}-${column[0].src}`}
-            className="min-h-full w-[clamp(240px,24vw,360px)] shrink-0"
+            className="min-h-full w-[clamp(280px,28vw,420px)] shrink-0"
           >
             {column.map((image, imageIndex) => (
               <div
