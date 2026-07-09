@@ -4,6 +4,7 @@ import { SiteBackground } from "@/components/interactive/SiteBackground";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { Hero } from "@/components/sections/Hero";
 import { Servicios } from "@/components/sections/Servicios";
+import { MisionVisionValores } from "@/components/sections/MisionVisionValores";
 import { Demo } from "@/components/sections/Demo";
 import { Trabajo } from "@/components/sections/Trabajo";
 import { Equipo } from "@/components/sections/Equipo";
@@ -73,6 +74,7 @@ export default function Home() {
         <SiteHeader />
         <Hero />
         <Servicios />
+        <MisionVisionValores />
         <Demo />
         <Trabajo />
         <Equipo />
