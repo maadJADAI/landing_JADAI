@@ -63,6 +63,9 @@ section[id]{ scroll-margin-top:16px; }
 .marquee-track{ animation:marquee 46s linear infinite; }
 @keyframes marquee{ to{ transform:translateX(-50%); } }
 
+.intro-collage-track{ animation:intro-collage-pan 78s linear infinite; }
+@keyframes intro-collage-pan{ to{ transform:translate3d(-50%,0,0); } }
+
 /* puntos de "escribiendo…" del chatbot demo (docs/05·D) */
 .typing-dot{
   display:block; width:6px; height:6px; border-radius:999px;
@@ -74,5 +77,6 @@ section[id]{ scroll-margin-top:16px; }
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior:auto; }
   .marquee-track{ animation:none; }
+  .intro-collage-track{ animation:none; }
   .typing-dot{ animation:none; }
 }

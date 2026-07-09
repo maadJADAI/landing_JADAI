@@ -1,44 +1,102 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ReferentsMarquee } from "@/components/interactive/ReferentsMarquee";
 import { useReducedMotion } from "@/lib/hooks";
-import { readToken } from "@/lib/utils";
 
-/* 3D diferido: no inflar el bundle inicial ni intentar SSR de WebGL (docs/05·C). */
-const Node3D = dynamic(() => import("@/components/interactive/Node3D"), {
-  ssr: false,
-});
+const columns = [
+  [
+    { src: "/fotos-frases/frase-01.png", height: "54%" },
+    { src: "/fotos-frases/nyse-11.png", height: "46%" },
+  ],
+  [
+    { src: "/fotos-frases/churchill-09.png", height: "62%" },
+    { src: "/fotos-frases/gadsden-12.png", height: "38%" },
+  ],
+  [
+    { src: "/fotos-frases/frase-02.png", height: "36%" },
+    { src: "/fotos-frases/frase-03.png", height: "64%" },
+  ],
+  [
+    { src: "/fotos-frases/libertad-10.png", height: "58%" },
+    { src: "/fotos-frases/frase-04.png", height: "42%" },
+  ],
+  [
+    { src: "/fotos-frases/frase-06.png", height: "48%" },
+    { src: "/fotos-frases/symbol-13.png", height: "52%" },
+  ],
+  [
+    { src: "/fotos-frases/frase-07.png", height: "44%" },
+    { src: "/fotos-frases/frase-08.png", height: "56%" },
+  ],
+];
 
-/* Acto 1 — intro cinematográfico full-screen oscuro (docs/04 §0 · 05·A).
-   Constelación de fondo, nodo 3D, frases que movieron el mundo en marquee,
-   CTA "Explorar" y hint de scroll. */
-export function Intro() {
-  const ref = useRef<HTMLElement | null>(null);
-  const reduce = useReducedMotion();
-  const [colors, setColors] = useState<{ wire: string; point: string } | null>(
-    null,
+function CollageImage({
+  src,
+  preload,
+}: {
+  src: string;
+  preload?: boolean;
+}) {
+  return (
+    <Image
+      src={src}
+      alt=""
+      fill
+      sizes="(min-width: 1024px) 480px, 72vw"
+      className="object-cover"
+      preload={preload || undefined}
+      loading={preload ? undefined : "lazy"}
+    />
   );
+}
 
-  useEffect(() => {
-    if (!ref.current) return;
-    // degradar al motivo plano si no hay WebGL (docs/05·C)
-    const probe = document.createElement("canvas");
-    const gl =
-      probe.getContext("webgl2") ?? probe.getContext("webgl");
-    if (!gl) return;
-    setColors({
-      wire: readToken(ref.current, "--text"),
-      point: readToken(ref.current, "--accent"),
-    });
-  }, []);
+function IntroCollage() {
+  const sequence = [...columns, ...columns];
+
+  return (
+    <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+      <div className="intro-collage-track flex h-full w-max will-change-transform">
+        {sequence.map((column, columnIndex) => (
+          <div
+            key={`${columnIndex}-${column[0].src}`}
+            className="h-full w-[clamp(280px,32vw,480px)] shrink-0"
+          >
+            {column.map((image, imageIndex) => (
+              <div
+                key={image.src}
+                className="relative w-full overflow-hidden"
+                style={{ height: image.height }}
+              >
+                <CollageImage
+                  src={image.src}
+                  preload={columnIndex < 4 && imageIndex === 0}
+                />
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+      <div
+        className="absolute inset-0 bg-[rgba(0,0,0,.58)] backdrop-blur-[1.5px] backdrop-saturate-[.72]"
+        aria-hidden
+      />
+      <div
+        className="absolute inset-0 bg-[linear-gradient(180deg,var(--bg)_0%,transparent_18%,transparent_80%,var(--bg)_100%)]"
+        aria-hidden
+      />
+      <div
+        className="absolute inset-0 bg-[linear-gradient(90deg,var(--bg)_0%,transparent_12%,transparent_88%,var(--bg)_100%)] opacity-70"
+        aria-hidden
+      />
+    </div>
+  );
+}
+
+export function Intro() {
+  const reduce = useReducedMotion();
 
   const explorar = () => {
-    // el tope del contenido es <main id="contenido"> (header + hero),
-    // el mismo punto de reposo que usa IntroSnap
     document
       .getElementById("contenido")
       ?.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
@@ -46,22 +104,13 @@ export function Intro() {
 
   return (
     <section
-      ref={ref}
       data-theme="dark"
-      /* svh y no dvh: la altura no cambia cuando Safari iOS colapsa la barra,
-         así la frontera del snap y el layout no se mueven en pleno scroll */
-      className="relative z-10 flex min-h-svh flex-col overflow-hidden text-ink"
+      className="relative z-10 flex min-h-svh flex-col overflow-hidden bg-bg text-ink"
       aria-label="Introducción"
     >
-      {/* nodo 3D — sutil, detrás del contenido; 1 sola instancia (docs/05) */}
-      {!reduce && colors ? (
-        <div className="absolute inset-x-0 top-1/2 z-0 mx-auto h-[min(70vw,520px)] w-[min(70vw,520px)] -translate-y-1/2 opacity-55">
-          <Node3D wireColor={colors.wire} pointColor={colors.point} />
-        </div>
-      ) : null}
+      <IntroCollage />
 
       <div className="relative z-10 flex flex-1 flex-col">
-        {/* logo blanco + label */}
         <div className="flex flex-col items-center gap-5 px-6 pt-[14vh] text-center">
           <Image
             src="/brand/jadai-logo-white.png"
@@ -76,12 +125,8 @@ export function Intro() {
           </p>
         </div>
 
-        {/* frases que movieron el mundo */}
-        <div className="my-auto py-10">
-          <ReferentsMarquee />
-        </div>
+        <div className="my-auto min-h-[18vh]" aria-hidden="true" />
 
-        {/* CTA + hint */}
         <div className="flex flex-col items-center gap-6 pb-12">
           <Button variant="accent" size="lg" onClick={explorar}>
             Explorar
@@ -90,7 +135,13 @@ export function Intro() {
             onClick={explorar}
             className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted transition-colors hover:text-ink"
           >
-            desliza <span className="inline-block animate-bounce motion-reduce:animate-none" aria-hidden>↓</span>
+            desliza{" "}
+            <span
+              className="inline-block animate-bounce motion-reduce:animate-none"
+              aria-hidden
+            >
+              ↓
+            </span>
           </button>
         </div>
       </div>
