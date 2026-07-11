@@ -8,8 +8,8 @@ export function Trabajo() {
     <section id="trabajo" className="border-t border-rule py-24">
       <Container>
         <SectionHead
-          titulo="Producto en producción"
-          lede="Casos reales de nuestras tres verticales."
+          titulo="Proyectos en acción"
+          lede="Agentes operativos 24/7 conectados a sistemas reales."
         />
         <div className="grid gap-px overflow-hidden rounded-[3px] border border-rule bg-rule md:grid-cols-3">
           {casos.map((c, i) => (
@@ -19,7 +19,7 @@ export function Trabajo() {
                   className="font-mono text-[11px] uppercase tracking-[0.2em]"
                   style={{ color: `var(${c.tokenColor})` }}
                 >
-                  {c.vertical}
+                  {c.tipo}
                 </span>
                 <h3 className="mt-4 text-xl font-semibold leading-snug">
                   {c.titulo}

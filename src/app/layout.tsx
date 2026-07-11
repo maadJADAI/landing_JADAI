@@ -23,22 +23,22 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://jadai.biz"),
   title: {
-    default: "JADAI — IA aplicada",
-    template: "%s · JADAI",
+    default: "JADAI - IA aplicada",
+    template: "%s - JADAI",
   },
   description:
-    "Construimos IA que factura. Agentes, chatbots y modelos a medida para fintech, agro y más. IA aplicada, Ecuador.",
+    "Construimos IA que factura. Agentes, chatbots y modelos a medida para operaciones. IA aplicada, Ecuador.",
   keywords: [
     "IA Ecuador",
     "agentes de IA",
     "chatbots WhatsApp",
-    "IA fintech",
-    "IA acuicultura",
+    "automatización con IA",
+    "agentes WhatsApp",
     "estudio de IA Guayaquil",
   ],
   alternates: { canonical: "/" },
   openGraph: {
-    title: "JADAI — IA aplicada",
+    title: "JADAI - IA aplicada",
     description:
       "Construimos IA que factura. Agentes, chatbots y modelos a medida.",
     url: "https://jadai.biz",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "JADAI — IA aplicada",
+    title: "JADAI - IA aplicada",
     description:
       "Construimos IA que factura. Agentes, chatbots y modelos a medida.",
   },
@@ -62,7 +62,6 @@ export default function RootLayout({
       lang="es"
       className={`${generalSans.variable} ${jetbrainsMono.variable} h-full`}
     >
-      {/* Toda la página vive en el tema oscuro: un solo espacio continuo. */}
       <body data-theme="dark" className="min-h-full antialiased">
         {children}
       </body>

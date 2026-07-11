@@ -5,8 +5,6 @@ import { SiteHeader } from "@/components/sections/SiteHeader";
 import { Hero } from "@/components/sections/Hero";
 import { Servicios } from "@/components/sections/Servicios";
 import { MisionVisionValores } from "@/components/sections/MisionVisionValores";
-import { Demo } from "@/components/sections/Demo";
-import { Trabajo } from "@/components/sections/Trabajo";
 import { Equipo } from "@/components/sections/Equipo";
 import { StatsSection } from "@/components/sections/StatsSection";
 import { Proceso } from "@/components/sections/Proceso";
@@ -16,7 +14,7 @@ import { Footer } from "@/components/sections/Footer";
 import { ChatWidget } from "@/components/ui/ChatWidget";
 import { equipo } from "@/content/equipo";
 import { faq } from "@/content/faq";
-import { verticales } from "@/content/servicios";
+import { servicios } from "@/content/servicios";
 import { site } from "@/content/site";
 
 /* Schema.org JSON-LD (docs/09): Organization + Services + FAQPage. */
@@ -40,7 +38,7 @@ function jsonLd() {
         areaServed: "Ecuador",
         sameAs: equipo.map((p) => p.linkedin),
       },
-      ...verticales.map((v) => ({
+      ...servicios.map((v) => ({
         "@type": "Service",
         name: `IA aplicada — ${v.nombre}`,
         description: v.descripcion,
@@ -75,8 +73,6 @@ export default function Home() {
         <Hero />
         <Servicios />
         <MisionVisionValores />
-        <Demo />
-        <Trabajo />
         <Equipo />
         <StatsSection />
         <Proceso />

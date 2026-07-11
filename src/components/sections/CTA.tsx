@@ -28,9 +28,7 @@ export function CTA() {
                 Hablar con un agente
               </OpenChatButton>
             </div>
-            <p className="mt-8 font-mono text-xs text-muted">
-              {site.email} · {site.ciudad}
-            </p>
+            <p className="mt-8 font-mono text-xs text-muted">{site.ciudad}</p>
           </div>
         </Reveal>
       </Container>

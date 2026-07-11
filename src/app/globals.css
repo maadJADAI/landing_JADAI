@@ -12,10 +12,8 @@
   --c-hair:rgba(23,22,26,.14); --c-hair-strong:rgba(23,22,26,.30);
   /* acento · cian de marca */
   --c-cyan:#0FB2C6; --c-cyan-deep:#076A75; --c-cyan-wash:#DDEFF1;
-  /* verticales */
+  /* agentes */
   --agents-100:#FFB74D; --agents-200:#FF9E3D; --agents-300:#FF8F26; --agents-400:#FF7D00; --agents-500:#E66A00; --agents-600:#C55A00;
-  --fintech-100:#B3CDE0; --fintech-200:#7A9EC2; --fintech-300:#4A7C9D; --fintech-400:#2B4F6E; --fintech-500:#1C3C54;
-  --agro-100:#D9E8D2; --agro-200:#B5C9B0; --agro-300:#8DA88D; --agro-400:#63956A; --agro-500:#4B7B52; --agro-600:#2F5A3A; --agro-700:#1F3B28;
 
   /* semánticos · tema claro */
   --bg:var(--c-paper); --bg-alt:var(--c-paper-2); --panel:var(--c-white); --tint:var(--c-paper-3);
@@ -40,7 +38,7 @@
   --color-ink:var(--text); --color-ink-2:var(--text-2); --color-muted:var(--text-muted);
   --color-rule:var(--rule); --color-rule-strong:var(--rule-strong);
   --color-accent:var(--accent); --color-accent-ink:var(--accent-ink); --color-accent-wash:var(--accent-wash); --color-on-accent:var(--on-accent);
-  --color-agents:var(--agents-400); --color-fintech:var(--fintech-400); --color-agro:var(--agro-500);
+  --color-agents:var(--agents-400);
   --font-sans:var(--font-general-sans); --font-mono:var(--font-jetbrains-mono);
 }
 

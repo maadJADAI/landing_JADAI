@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { equipo } from "@/content/equipo";
-import { verticales } from "@/content/servicios";
+import { servicios } from "@/content/servicios";
 import { site } from "@/content/site";
 
 /* Footer (docs/04 §9), restilado a tokens. */
@@ -28,7 +28,7 @@ export function Footer() {
               Servicios
             </h3>
             <ul className="mt-4 space-y-2.5 text-sm">
-              {verticales.map((v) => (
+              {servicios.map((v) => (
                 <li key={v.id}>
                   <a
                     href="#servicios"

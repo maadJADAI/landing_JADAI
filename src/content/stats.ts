@@ -6,7 +6,7 @@ export type Stat = {
 };
 
 export const stats: Stat[] = [
-  { valor: 3, label: "Tres verticales en producción" },
-  { valor: 1, sufijo: "er", label: "Primer hackathon ya ganado" },
   { valor: 24, sufijo: "/7", label: "Agentes 24/7" },
+  { valor: 30, sufijo: " min", label: "Para detectar oportunidades" },
+  { valor: 1, label: "Equipo de implementación dedicado" },
 ];

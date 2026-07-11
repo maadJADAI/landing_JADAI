@@ -1,116 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Node3D from "@/components/interactive/Node3D";
 import { Button } from "@/components/ui/button";
 import { useReducedMotion } from "@/lib/hooks";
-
-type CollageItem = {
-  src: string;
-  width: number;
-  height: number;
-};
-
-const columns: CollageItem[][] = [
-  [
-    { src: "/fotos-frases/frase-01.png", width: 480, height: 360 },
-    { src: "/fotos-frases/nyse-11.png", width: 480, height: 360 },
-    { src: "/fotos-frases/frase-06.png", width: 480, height: 480 },
-    { src: "/fotos-frases/gadsden-12.png", width: 480, height: 480 },
-  ],
-  [
-    { src: "/fotos-frases/churchill-09.png", width: 480, height: 720 },
-    { src: "/fotos-frases/frase-08.png", width: 600, height: 450 },
-    { src: "/fotos-frases/symbol-13.png", width: 480, height: 720 },
-  ],
-  [
-    { src: "/fotos-frases/frase-02.png", width: 600, height: 450 },
-    { src: "/fotos-frases/frase-03.png", width: 480, height: 480 },
-    { src: "/fotos-frases/libertad-10.png", width: 480, height: 720 },
-  ],
-  [
-    { src: "/fotos-frases/libertad-10.png", width: 480, height: 720 },
-    { src: "/fotos-frases/frase-04.png", width: 480, height: 720 },
-    { src: "/fotos-frases/nyse-11.png", width: 480, height: 360 },
-  ],
-  [
-    { src: "/fotos-frases/frase-07.png", width: 600, height: 900 },
-    { src: "/fotos-frases/gadsden-12.png", width: 480, height: 480 },
-    { src: "/fotos-frases/frase-01.png", width: 480, height: 360 },
-  ],
-  [
-    { src: "/fotos-frases/symbol-13.png", width: 480, height: 720 },
-    { src: "/fotos-frases/frase-06.png", width: 480, height: 480 },
-    { src: "/fotos-frases/frase-02.png", width: 600, height: 450 },
-  ],
-];
-
-function CollageImage({
-  src,
-  width,
-  height,
-  preload,
-}: {
-  src: string;
-  width: number;
-  height: number;
-  preload?: boolean;
-}) {
-  return (
-    <Image
-      src={src}
-      alt=""
-      width={width}
-      height={height}
-      sizes="(min-width: 1024px) 480px, 72vw"
-      className="block h-auto w-full"
-      preload={preload || undefined}
-      loading={preload ? undefined : "lazy"}
-    />
-  );
-}
-
-function IntroCollage() {
-  const sequence = [...columns, ...columns];
-
-  return (
-    <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
-      <div className="intro-collage-track flex h-full w-max will-change-transform">
-        {sequence.map((column, columnIndex) => (
-          <div
-            key={`${columnIndex}-${column[0].src}`}
-            className="min-h-full w-[clamp(280px,28vw,420px)] shrink-0"
-          >
-            {column.map((image, imageIndex) => (
-              <div
-                key={image.src}
-                className="w-full overflow-hidden"
-              >
-                <CollageImage
-                  src={image.src}
-                  width={image.width}
-                  height={image.height}
-                  preload={columnIndex < 4 && imageIndex === 0}
-                />
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-      <div
-        className="absolute inset-0 bg-[rgba(0,0,0,.58)] backdrop-blur-[1.5px] backdrop-saturate-[.72]"
-        aria-hidden
-      />
-      <div
-        className="absolute inset-0 bg-[linear-gradient(180deg,var(--bg)_0%,transparent_18%,transparent_80%,var(--bg)_100%)]"
-        aria-hidden
-      />
-      <div
-        className="absolute inset-0 bg-[linear-gradient(90deg,var(--bg)_0%,transparent_12%,transparent_88%,var(--bg)_100%)] opacity-70"
-        aria-hidden
-      />
-    </div>
-  );
-}
 
 export function Intro() {
   const reduce = useReducedMotion();
@@ -127,7 +20,13 @@ export function Intro() {
       className="relative z-10 flex min-h-svh flex-col overflow-hidden bg-bg text-ink"
       aria-label="Introducción"
     >
-      <IntroCollage />
+      <div className="absolute inset-0 z-0" aria-hidden="true">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_44%,rgba(34,204,230,.18),transparent_34%),radial-gradient(circle_at_50%_50%,rgba(255,255,255,.08),transparent_25%)]" />
+        {!reduce ? (
+          <Node3D className="absolute left-1/2 top-1/2 h-[min(86vw,660px)] w-[min(86vw,660px)] -translate-x-1/2 -translate-y-1/2 opacity-90" />
+        ) : null}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_44%,var(--bg)_78%)]" />
+      </div>
 
       <div className="relative z-10 flex flex-1 flex-col lg:justify-center">
         <div className="flex flex-col items-center gap-5 px-6 pt-[14vh] text-center lg:pt-0">

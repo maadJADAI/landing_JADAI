@@ -7,10 +7,10 @@ export const site = {
   nombre: "JADAI",
   claim: "Construimos IA que factura.",
   descripcion:
-    "IA aplicada desde Ecuador. Agentes, chatbots y modelos a medida para fintech, agro y operaciones — producto en producción, no slides.",
+    "IA aplicada desde Ecuador. Agentes, chatbots y modelos a medida para operaciones — producto en producción, no slides.",
   url: "https://jadai.biz",
   ciudad: "Ecuador",
-  email: "lacedeno@jadai.biz", // TODO(08): confirmar hello@jadai.biz
+  email: "info@jadai.biz",
   whatsapp: "", // TODO(08): ej. "593999999999" → wa.me
   agendarUrl: "", // TODO(08): Calendly / Google Calendar appointments
 } as const;
