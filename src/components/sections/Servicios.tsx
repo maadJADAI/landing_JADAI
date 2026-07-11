@@ -1,49 +1,8 @@
+import { IphoneMockup } from "@/components/interactive/IphoneMockup";
 import { Container } from "@/components/ui/Container";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { Reveal } from "@/components/ui/Reveal";
 import { agentes, proyectosEnAccion } from "@/content/servicios";
-
-function PhoneSpace() {
-  return (
-    <div className="relative mx-auto w-full max-w-[390px]">
-      <div className="absolute -inset-8 rounded-full bg-accent/10 blur-3xl" aria-hidden />
-      <div className="relative rounded-[46px] border border-white/20 bg-[linear-gradient(145deg,rgba(255,255,255,.22),rgba(255,255,255,.03))] p-2 shadow-[0_34px_90px_-30px_rgba(34,204,230,.45)]">
-        <div className="rounded-[38px] border border-black/70 bg-[#0b0c0f] p-3">
-          <div className="relative h-[620px] overflow-hidden rounded-[30px] bg-[linear-gradient(180deg,#111b14_0%,#09110c_100%)]">
-            <div className="absolute left-1/2 top-3 h-6 w-28 -translate-x-1/2 rounded-full bg-black/80" />
-            <div className="flex h-full flex-col px-4 pb-5 pt-12">
-              <div className="flex items-center gap-3 border-b border-white/10 pb-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-sm font-semibold text-on-accent">
-                  J
-                </span>
-                <div>
-                  <p className="text-sm font-semibold text-white">JADAI Agente</p>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/40">
-                    WhatsApp real pendiente
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-1 items-center justify-center text-center">
-                <div className="max-w-[24ch]">
-                  <p className="text-lg font-semibold text-white">
-                    Espacio reservado para demo real
-                  </p>
-                  <p className="mt-3 text-sm leading-relaxed text-white/60">
-                    Aquí va una captura o video interactivo del bot cuando tengamos
-                    el número de WhatsApp y la conversación real.
-                  </p>
-                </div>
-              </div>
-              <div className="rounded-full border border-white/10 bg-white/10 px-4 py-3 font-mono text-[11px] text-white/40">
-                Conversación real, no mockup HTML
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export function Servicios() {
   return (
@@ -109,7 +68,7 @@ export function Servicios() {
           </div>
 
           <Reveal delay={120}>
-            <PhoneSpace />
+            <IphoneMockup />
           </Reveal>
         </div>
       </Container>
