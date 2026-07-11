@@ -17,7 +17,7 @@ export function Intro() {
   return (
     <section
       data-theme="dark"
-      className="relative z-10 flex min-h-svh flex-col overflow-hidden bg-bg text-ink"
+      className="relative z-10 flex min-h-svh flex-col overflow-hidden bg-transparent text-ink"
       aria-label="Introducción"
     >
       <div className="absolute inset-0 z-0" aria-hidden="true">
@@ -25,7 +25,7 @@ export function Intro() {
         {!reduce ? (
           <Node3D className="absolute left-1/2 top-1/2 h-[min(86vw,660px)] w-[min(86vw,660px)] -translate-x-1/2 -translate-y-1/2 opacity-90" />
         ) : null}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_44%,var(--bg)_78%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_44%,rgba(15,14,18,.62)_78%,rgba(15,14,18,.88)_100%)]" />
       </div>
 
       <div className="relative z-10 flex flex-1 flex-col lg:justify-center">
