@@ -3,14 +3,14 @@ export type Integrante = {
   rol: string;
   foto: string;
   email: string;
-  linkedin: string;
+  linkedin?: string;
   nota?: string;
 };
 
 export const equipo: Integrante[] = [
   {
     nombre: "Luis Abrahan Cedeño",
-    rol: "AI Software Engineer · Arquitecto de sistemas agénticos",
+    rol: "CTO",
     foto: "/team/luis-cedeno.jpg",
     email: "info@jadai.biz",
     linkedin:
@@ -18,10 +18,16 @@ export const equipo: Integrante[] = [
   },
   {
     nombre: "Cristian Intriago",
-    rol: "Desarrollador de software de automatización",
+    rol: "CFO",
     foto: "/team/cristian-intriago.jpg",
     email: "info@jadai.biz",
     linkedin: "https://www.linkedin.com/in/crisintriago/",
+  },
+  {
+    nombre: "Eduardo Zambrano",
+    rol: "CMO · Área de finanzas",
+    foto: "/team/eduardo-zambrano.jpeg",
+    email: "info@jadai.biz",
   },
   {
     nombre: "Jandony Guzmán",

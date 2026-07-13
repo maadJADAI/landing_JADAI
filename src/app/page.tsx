@@ -36,7 +36,7 @@ function jsonLd() {
           addressCountry: "EC",
         },
         areaServed: "Ecuador",
-        sameAs: equipo.map((p) => p.linkedin),
+        sameAs: equipo.flatMap((p) => (p.linkedin ? [p.linkedin] : [])),
       },
       ...servicios.map((v) => ({
         "@type": "Service",

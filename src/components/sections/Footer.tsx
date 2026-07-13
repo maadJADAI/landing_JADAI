@@ -74,18 +74,20 @@ export function Footer() {
               LinkedIn
             </h3>
             <ul className="mt-4 space-y-2.5 text-sm">
-              {equipo.map((p) => (
-                <li key={p.nombre}>
-                  <a
-                    href={p.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-ink-2 transition-colors hover:text-accent-ink"
-                  >
-                    {p.nombre.split(" ").slice(0, 2).join(" ")}
-                  </a>
-                </li>
-              ))}
+              {equipo
+                .filter((p) => p.linkedin)
+                .map((p) => (
+                  <li key={p.nombre}>
+                    <a
+                      href={p.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-ink-2 transition-colors hover:text-accent-ink"
+                    >
+                      {p.nombre.split(" ").slice(0, 2).join(" ")}
+                    </a>
+                  </li>
+                ))}
               <li>
                 <a
                   href={`mailto:${site.email}`}

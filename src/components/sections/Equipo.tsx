@@ -27,9 +27,9 @@ export function Equipo() {
       <Container>
         <SectionHead
           titulo="Team"
-          lede="Ingenieros que se integran a tu equipo y responden con nombre y apellido."
+          lede="Equipo que se integra a tu operación y responde con nombre y apellido."
         />
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {equipo.map((p, i) => (
             <Reveal key={p.nombre} delay={i * 80}>
               <div className="group">
@@ -58,15 +58,17 @@ export function Equipo() {
                     >
                       <Mail className="size-4" aria-hidden />
                     </a>
-                    <a
-                      href={p.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${p.nombre} en LinkedIn`}
-                      className="rounded-[3px] border border-rule p-2 text-ink-2 transition-colors hover:border-rule-strong hover:text-accent-ink"
-                    >
-                      <LinkedinIcon className="size-4" />
-                    </a>
+                    {p.linkedin ? (
+                      <a
+                        href={p.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${p.nombre} en LinkedIn`}
+                        className="rounded-[3px] border border-rule p-2 text-ink-2 transition-colors hover:border-rule-strong hover:text-accent-ink"
+                      >
+                        <LinkedinIcon className="size-4" />
+                      </a>
+                    ) : null}
                   </div>
                 </div>
               </div>
