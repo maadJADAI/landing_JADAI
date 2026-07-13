@@ -68,7 +68,7 @@ export function Servicios() {
           </div>
 
           <Reveal delay={120}>
-            <IphoneMockup />
+            <IphoneMockup videoSrc="/device/bot-demo.mp4" />
           </Reveal>
         </div>
       </Container>
