@@ -29,11 +29,11 @@ export function IphoneMockup({ videoSrc }: { videoSrc?: string }) {
         }}
         onPointerLeave={() => setTilt({ x: 0, y: 0 })}
       >
-        <div className="absolute inset-x-[8.4%] bottom-[4.7%] top-[3.8%] overflow-hidden rounded-[10%/4.8%] bg-[#0b1410]">
+        <div className="absolute inset-x-[5.9%] bottom-[2.8%] top-[2.7%] overflow-hidden rounded-[11.5%/5.6%] bg-black">
           {videoSrc ? (
             <video
               src={videoSrc}
-              className="h-full w-full object-cover"
+              className="h-full w-full scale-[1.035] object-cover"
               autoPlay
               muted
               loop
